@@ -1,1 +1,29 @@
-
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code Withings</title>
+</head>
+<body style="font-family:sans-serif;max-width:40em;margin:3em auto;padding:0 1em">
+<h1>Code d'autorisation Withings</h1>
+<p>Copiez ce code et collez-le tout de suite dans le terminal du Pi :</p>
+<pre id="code" style="font-size:1.3em;background:#eee;padding:1em;white-space:pre-wrap;word-break:break-all;user-select:all"></pre>
+<button id="copier" style="font-size:1em;padding:.6em 1.2em">Copier le code</button>
+<span id="ok"></span>
+<script>
+  const code = new URLSearchParams(location.search).get("code");
+  document.getElementById("code").textContent = code || "Aucun code dans l'adresse.";
+  document.getElementById("copier").onclick = async () => {
+    if (!code) return;
+    try {
+      await navigator.clipboard.writeText(code);
+      document.getElementById("ok").textContent = " Copié.";
+    } catch (e) {
+      document.getElementById("ok").textContent = " Sélectionnez le code et copiez-le à la main.";
+    }
+  };
+</script>
+</body>
+</html>
